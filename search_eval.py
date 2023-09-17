@@ -10,6 +10,7 @@ class InL2Ranker(metapy.index.RankingFunction):
     """
     Create a new ranking function in Python that can be used in MeTA.
     """
+    
     def __init__(self, some_param=1.0):
         self.param = some_param
         # You *must* call the base class constructor here!
