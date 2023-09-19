@@ -10,7 +10,7 @@ class InL2Ranker(metapy.index.RankingFunction):
     """
     Create a new ranking function in Python that can be used in MeTA.
     """
-    
+
     def __init__(self, some_param=1.0):
         self.param = some_param
         # You *must* call the base class constructor here!
@@ -42,6 +42,7 @@ def load_ranker(cfg_file):
     configuration file used to load the index. You can ignore this for MP2.
     """
     return InL2Ranker()
+    #return metapy.index.OkapiBM25(k1=1.2,b=0.75,k3=500)
     #return metapy.index.JelinekMercer()
 
 if __name__ == '__main__':
@@ -75,6 +76,9 @@ if __name__ == '__main__':
             query.content(line.strip())
             results = ranker.score(idx, query, top_k)
             avg_p = ev.avg_p(results, query_start + query_num, top_k)
+            #with open('bm25.avg_p.txt', 'a') as f:
+            #    print(avg_p, file=f)
+
             print("Query {} average precision: {}".format(query_num + 1, avg_p))
     print("Mean average precision: {}".format(ev.map()))
     print("Elapsed: {} seconds".format(round(time.time() - start_time, 4)))
